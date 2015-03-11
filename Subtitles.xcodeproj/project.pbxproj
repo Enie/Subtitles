@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87163B351AAF7327007F915C /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B341AAF7327007F915C /* Time.m */; };
+		87163B381AAF7C79007F915C /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B371AAF7C79007F915C /* TimeFormatter.m */; };
+		87163B3A1AB03D43007F915C /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87163B391AB03D43007F915C /* Main.xib */; };
+		87163B3C1AB053EB007F915C /* SubtitleWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87163B3B1AB053EB007F915C /* SubtitleWindowController.xib */; };
+		87163B3F1AB05C71007F915C /* SubtitleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B3E1AB05C71007F915C /* SubtitleWindowController.m */; };
+		87163B431AB06E81007F915C /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B411AB06E81007F915C /* PreferencesWindowController.m */; };
+		87163B441AB06E81007F915C /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87163B421AB06E81007F915C /* PreferencesWindowController.xib */; };
 		87A08C801AAF069B006CEC25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C7F1AAF069B006CEC25 /* AppDelegate.m */; };
 		87A08C821AAF069B006CEC25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C811AAF069B006CEC25 /* main.m */; };
 		87A08C851AAF069B006CEC25 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C841AAF069B006CEC25 /* ViewController.m */; };
 		87A08C871AAF069B006CEC25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A08C861AAF069B006CEC25 /* Images.xcassets */; };
-		87A08C8A1AAF069B006CEC25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87A08C881AAF069B006CEC25 /* Main.storyboard */; };
 		87A08C961AAF069B006CEC25 /* SubtitlesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C951AAF069B006CEC25 /* SubtitlesTests.m */; };
+		87A08CA11AAF100A006CEC25 /* Subtitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08CA01AAF100A006CEC25 /* Subtitle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +33,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		87163B331AAF7327007F915C /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
+		87163B341AAF7327007F915C /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
+		87163B361AAF7C79007F915C /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
+		87163B371AAF7C79007F915C /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
+		87163B391AB03D43007F915C /* Main.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Main.xib; sourceTree = "<group>"; };
+		87163B3B1AB053EB007F915C /* SubtitleWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubtitleWindowController.xib; sourceTree = "<group>"; };
+		87163B3D1AB05C71007F915C /* SubtitleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtitleWindowController.h; sourceTree = "<group>"; };
+		87163B3E1AB05C71007F915C /* SubtitleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtitleWindowController.m; sourceTree = "<group>"; };
+		87163B401AB06E81007F915C /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		87163B411AB06E81007F915C /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		87163B421AB06E81007F915C /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		87A08C791AAF069B006CEC25 /* Subtitles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subtitles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A08C7D1AAF069B006CEC25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87A08C7E1AAF069B006CEC25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -38,6 +56,8 @@
 		87A08C8F1AAF069B006CEC25 /* SubtitlesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubtitlesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A08C941AAF069B006CEC25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87A08C951AAF069B006CEC25 /* SubtitlesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubtitlesTests.m; sourceTree = "<group>"; };
+		87A08C9F1AAF100A006CEC25 /* Subtitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtitle.h; sourceTree = "<group>"; };
+		87A08CA01AAF100A006CEC25 /* Subtitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subtitle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +101,23 @@
 			children = (
 				87A08C7E1AAF069B006CEC25 /* AppDelegate.h */,
 				87A08C7F1AAF069B006CEC25 /* AppDelegate.m */,
+				87A08C9F1AAF100A006CEC25 /* Subtitle.h */,
+				87A08CA01AAF100A006CEC25 /* Subtitle.m */,
+				87163B3D1AB05C71007F915C /* SubtitleWindowController.h */,
+				87163B3E1AB05C71007F915C /* SubtitleWindowController.m */,
+				87163B3B1AB053EB007F915C /* SubtitleWindowController.xib */,
+				87163B401AB06E81007F915C /* PreferencesWindowController.h */,
+				87163B411AB06E81007F915C /* PreferencesWindowController.m */,
+				87163B421AB06E81007F915C /* PreferencesWindowController.xib */,
+				87163B331AAF7327007F915C /* Time.h */,
+				87163B341AAF7327007F915C /* Time.m */,
+				87163B361AAF7C79007F915C /* TimeFormatter.h */,
+				87163B371AAF7C79007F915C /* TimeFormatter.m */,
 				87A08C831AAF069B006CEC25 /* ViewController.h */,
 				87A08C841AAF069B006CEC25 /* ViewController.m */,
 				87A08C861AAF069B006CEC25 /* Images.xcassets */,
 				87A08C881AAF069B006CEC25 /* Main.storyboard */,
+				87163B391AB03D43007F915C /* Main.xib */,
 				87A08C7C1AAF069B006CEC25 /* Supporting Files */,
 			);
 			path = Subtitles;
@@ -196,8 +229,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87163B441AB06E81007F915C /* PreferencesWindowController.xib in Resources */,
 				87A08C871AAF069B006CEC25 /* Images.xcassets in Resources */,
-				87A08C8A1AAF069B006CEC25 /* Main.storyboard in Resources */,
+				87163B3C1AB053EB007F915C /* SubtitleWindowController.xib in Resources */,
+				87163B3A1AB03D43007F915C /* Main.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87163B431AB06E81007F915C /* PreferencesWindowController.m in Sources */,
+				87163B351AAF7327007F915C /* Time.m in Sources */,
 				87A08C851AAF069B006CEC25 /* ViewController.m in Sources */,
+				87163B3F1AB05C71007F915C /* SubtitleWindowController.m in Sources */,
+				87A08CA11AAF100A006CEC25 /* Subtitle.m in Sources */,
 				87A08C821AAF069B006CEC25 /* main.m in Sources */,
 				87A08C801AAF069B006CEC25 /* AppDelegate.m in Sources */,
+				87163B381AAF7C79007F915C /* TimeFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +374,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Subtitles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Debug;
 		};
@@ -345,7 +387,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Subtitles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Release;
 		};
@@ -404,6 +448,7 @@
 				87A08C9B1AAF069B006CEC25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87A08C9C1AAF069B006CEC25 /* Build configuration list for PBXNativeTarget "SubtitlesTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +457,7 @@
 				87A08C9E1AAF069B006CEC25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,9 +7,23 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewController.h"
+
+@class PreferencesWindowController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+
+@property (strong) PreferencesWindowController *prefWindowController;
+@property (strong) NSMutableArray *windowControllers;
+
+- (IBAction)newDocument:(id)sender;
+- (IBAction)openDocument:(id)sender;
+- (IBAction)saveDocument:(id)sender;
+- (IBAction)saveDocumentAs:(id)sender;
+- (IBAction)performClose:(id)sender;
+
+- (IBAction)showPreferencesWindow:(id)sender;
 
 @end
 

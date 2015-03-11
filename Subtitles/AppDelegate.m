@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "SubtitleWindowController.h"
+#import "PreferencesWindowController.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +20,70 @@
     // Insert code here to initialize your application
 }
 
+-(void)awakeFromNib
+{
+    _windowControllers = [NSMutableArray array];
+    [self newDocument:nil];
+    
+}
+
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
 }
+
+- (IBAction)newDocument:(id)sender
+{
+    SubtitleWindowController *controllerWindow = [[SubtitleWindowController alloc] initWithWindowNibName:@"SubtitleWindowController"];
+    //[controllerWindow showWindow:self];
+    
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    if(keyWindow){
+        [keyWindow resignKeyWindow];
+    }
+    
+    [controllerWindow.window orderFront:nil];
+    [controllerWindow.window makeKeyWindow];
+    [_windowControllers addObject:controllerWindow];
+}
+
+-(void)openDocument:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    if(!keyWindow)
+    {
+        [self newDocument:nil];
+        keyWindow = [[NSApplication sharedApplication] keyWindow];
+    }
+    [((SubtitleWindowController*)keyWindow.windowController).viewController openDocument:sender];
+}
+
+-(void)saveDocument:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    if(keyWindow)
+        [((SubtitleWindowController*)keyWindow.windowController).viewController saveDocument:sender];
+
+}
+
+-(void)saveDocumentAs:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    if(keyWindow)
+        [((SubtitleWindowController*)keyWindow.windowController).viewController saveDocumentAs:sender];
+}
+
+- (IBAction)performClose:(id)sender
+{
+    NSWindow *closingWindow = [[NSApplication sharedApplication] keyWindow];
+    [_windowControllers removeObject:closingWindow.windowController];
+}
+
+- (IBAction)showPreferencesWindow:(id)sender {
+    _prefWindowController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
+    [_prefWindowController.window orderFront:nil];
+    [_prefWindowController.window makeKeyWindow];
+}
+
+
 
 @end
