@@ -16,8 +16,10 @@
 
 -(instancetype)initWithString:(NSString*)time;
 +(instancetype)timeWithString:(NSString*)time;
++(instancetype)timeWithSeconds:(double)seconds;
 
 -(NSString*)toString;
+-(double)toSeconds;
 -(Time*)timeSubtractingTime:(Time*)time;
 -(Time*)timeAddingTime:(Time*)time;
 

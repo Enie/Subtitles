@@ -359,12 +359,18 @@ CA
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <button toolTip="Lock Table to Video - when the video is playing the table automatically scrolls to the subtitle at that point in time." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGt-BH-JQB">
+                    <button toolTip="Lock Table to Video - when the video is playing the table automatically scrolls to the subtitle at that point in time." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dGt-BH-JQB">
                         <rect key="frame" x="4" y="1" width="38" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="y1i-zu-LXw"/>
+                        </constraints>
                         <buttonCell key="cell" type="squareTextured" title="Lock" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rYn-Ld-RtJ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
                         </buttonCell>
+                        <connections>
+                            <binding destination="4Zf-VW-hpk" name="value" keyPath="self.videoLock" id="l0X-TR-SNh"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -372,8 +378,11 @@ CA
                     <constraint firstAttribute="bottom" secondItem="eBv-vM-Vq6" secondAttribute="bottom" id="Jec-Dc-pNg"/>
                     <constraint firstItem="mIh-O1-4IP" firstAttribute="top" secondItem="GAa-aU-LfB" secondAttribute="top" id="LtV-q2-zYB"/>
                     <constraint firstAttribute="trailing" secondItem="mIh-O1-4IP" secondAttribute="trailing" id="RR2-ck-cZG"/>
+                    <constraint firstItem="dGt-BH-JQB" firstAttribute="top" secondItem="mIh-O1-4IP" secondAttribute="bottom" constant="3" id="S1u-2S-l7O"/>
+                    <constraint firstItem="dGt-BH-JQB" firstAttribute="leading" secondItem="GAa-aU-LfB" secondAttribute="leading" constant="4" id="Tf4-qi-RYk"/>
                     <constraint firstItem="NKT-HG-37o" firstAttribute="top" secondItem="mIh-O1-4IP" secondAttribute="bottom" constant="1" id="gyq-an-lkn"/>
                     <constraint firstItem="mIh-O1-4IP" firstAttribute="leading" secondItem="GAa-aU-LfB" secondAttribute="leading" id="mlo-Pj-UAM"/>
+                    <constraint firstAttribute="bottom" secondItem="dGt-BH-JQB" secondAttribute="bottom" constant="2" id="p09-dc-a7D"/>
                     <constraint firstAttribute="bottom" secondItem="NKT-HG-37o" secondAttribute="bottom" id="tKn-cH-ArN"/>
                     <constraint firstAttribute="centerX" secondItem="eBv-vM-Vq6" secondAttribute="centerX" constant="20" id="uTl-6D-PVT"/>
                 </constraints>

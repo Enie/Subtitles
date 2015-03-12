@@ -32,7 +32,7 @@ NSString* newlineCharacter;
         NSString *pureString = [regex stringByReplacingMatchesInString:_text options:0 range:NSMakeRange(0, [_text length]) withTemplate:@""];
         //NSLog(@"%@", pureString);
         
-        double durationInSeconds = (_duration.hour*3600 + _duration.minute*60 + _duration.second);
+        double durationInSeconds = [_duration toSeconds];
         if (durationInSeconds!=0)
             self.charactersPerSecond = (double)[pureString length] / durationInSeconds;
         else
@@ -118,14 +118,6 @@ NSString* newlineCharacter;
     //self.end = _start + _duration;
     
     [self updateInfo];
-}
-
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
-    NSInteger ti = (NSInteger)interval;
-    NSInteger seconds = ti % 60;
-    NSInteger minutes = (ti / 60) % 60;
-    NSInteger hours = (ti / 3600);
-    return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
 }
 
 -(id)copyWithZone:(NSZone *)zone

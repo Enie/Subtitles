@@ -44,11 +44,7 @@
     if (_playerView.player.status == AVPlayerStatusReadyToPlay) {
         CMTime currentTime = _playerView.player.currentTime;
         Float64 currentSeconds = CMTimeGetSeconds(currentTime);
-        Time *startTime = [Time new];
-        
-        startTime.hour = floor(currentSeconds / 3600);
-        startTime.minute = floor(fmod((currentSeconds / 60), 60));
-        startTime.second = fmod(currentSeconds, 60);
+        Time *startTime = [Time timeWithSeconds:currentSeconds];
         
         long int senderRow = [_subtitlesTable rowForView:[sender superview]];
         Subtitle *sub = [[_subtitlesController arrangedObjects] objectAtIndex:senderRow];
@@ -241,16 +237,35 @@
     {
         [sub updateInfo];
     }
-//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"] ) {
-//        //NSLog(@"deal with %li lines per subtitle", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"]);
-//        
-//    }
-//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"] ) {
-//        //NSLog(@"deal with %li characters per line", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"]);
-//    }
-//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"] ) {
-//        //NSLog(@"deal with %li characters per second", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"]);
-//    }
+}
+
+
+id timeObserver;
+-(void)setVideoLock:(BOOL)videoLock
+{
+    _videoLock = videoLock;
+    if(_videoLock)
+    {
+        CMTime tm = CMTimeMakeWithSeconds(1, 10);
+        
+        timeObserver = [_playerView.player addPeriodicTimeObserverForInterval:tm
+             queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+
+                 Time *currentTime = [Time timeWithSeconds:CMTimeGetSeconds(time)];
+                 for(Subtitle *sub in [_subtitlesController arrangedObjects])
+                 {
+                     if([sub.end isGreaterThan:currentTime] && [sub.start isLessThan:currentTime])
+                     {
+                         [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:sub.index-1] byExtendingSelection:NO];
+                         [_subtitlesTable scrollRowToVisible:sub.index-1];
+                         return;
+                     }
+                 }
+             }];
+    }
+    else if(timeObserver){
+        [_playerView.player removeTimeObserver:timeObserver];
+    }
 }
 
 @end

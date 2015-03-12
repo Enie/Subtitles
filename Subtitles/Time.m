@@ -41,9 +41,25 @@
     return [[Time alloc] initWithString:time];
 }
 
++(instancetype)timeWithSeconds:(double)seconds
+{
+    Time *time = [Time new];
+    
+    time.hour = floor(seconds / 3600);
+    time.minute = floor(fmod((seconds / 60), 60));
+    time.second = fmod(seconds, 60);
+    
+    return time;
+}
+
 -(NSString *)toString
 {
     return [[NSString stringWithFormat:@"%02i:%02i:%06.3F", _hour, _minute, _second] stringByReplacingOccurrencesOfString:@"." withString:@","];
+}
+
+-(double)toSeconds
+{
+    return _hour*3600 + _minute*60 + _second;
 }
 
 -(Time *)timeSubtractingTime:(Time *)time

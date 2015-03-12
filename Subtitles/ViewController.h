@@ -20,6 +20,8 @@
 @property NSString *newlineCharacter;
 @property NSString *filePath;
 
+@property (nonatomic) BOOL videoLock;
+
 - (IBAction)addSubtitle:(id)sender;
 - (IBAction)removeSubtitle:(id)sender;
 
