@@ -46,7 +46,7 @@
     [_windowControllers addObject:controllerWindow];
 }
 
--(void)openDocument:(id)sender
+-(IBAction)openDocument:(id)sender
 {
     NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
     if(!keyWindow)
@@ -57,7 +57,18 @@
     [((SubtitleWindowController*)keyWindow.windowController).viewController openDocument:sender];
 }
 
--(void)saveDocument:(id)sender
+-(IBAction)openVideo:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    if(!keyWindow)
+    {
+        [self newDocument:nil];
+        keyWindow = [[NSApplication sharedApplication] keyWindow];
+    }
+    [((SubtitleWindowController*)keyWindow.windowController).viewController openVideo:sender];
+}
+
+-(IBAction)saveDocument:(id)sender
 {
     NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
     if(keyWindow)
@@ -65,7 +76,7 @@
 
 }
 
--(void)saveDocumentAs:(id)sender
+-(IBAction)saveDocumentAs:(id)sender
 {
     NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
     if(keyWindow)

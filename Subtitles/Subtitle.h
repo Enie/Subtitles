@@ -29,4 +29,6 @@
 @property NSColor *linesErrorColor;
 @property NSColor *durationErrorColor;
 
+-(void)updateInfo;
+
 @end

@@ -8,11 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="7YP-tV-aYp" userLabel="App Delegate" customClass="AppDelegate">
-            <connections>
-                <outlet property="viewController" destination="ELL-5X-7Wa" id="ODE-jf-6xV"/>
-            </connections>
-        </customObject>
+        <customObject id="7YP-tV-aYp" userLabel="App Delegate" customClass="AppDelegate"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="ELL-5X-7Wa" customClass="ViewController">
             <connections>
@@ -81,6 +77,12 @@
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openDocument:" target="7YP-tV-aYp" id="PaK-sZ-haE"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Video" keyEquivalent="o" id="7ak-4K-OX3">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openVideo:" target="7YP-tV-aYp" id="QGC-ka-2Z0"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">

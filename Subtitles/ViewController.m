@@ -12,22 +12,15 @@
 
 @implementation ViewController
 
-
--(void)awakeFromNib
+- (instancetype)init
 {
-    _newlineCharacter = @"\n";
-    
-    [self addSubtitle:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWithUserDefaults) name:NSUserDefaultsDidChangeNotification object:nil];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
+    self = [super init];
     if (self) {
         _newlineCharacter = @"\n";
         [self addSubtitle:nil];
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWithUserDefaults) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;
 }
@@ -44,6 +37,41 @@
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
+}
+
+-(IBAction)setStartToVideoPosition:(id)sender
+{
+    if (_playerView.player.status == AVPlayerStatusReadyToPlay) {
+        CMTime currentTime = _playerView.player.currentTime;
+        Float64 currentSeconds = CMTimeGetSeconds(currentTime);
+        Time *startTime = [Time new];
+        
+        startTime.hour = floor(currentSeconds / 3600);
+        startTime.minute = floor(fmod((currentSeconds / 60), 60));
+        startTime.second = fmod(currentSeconds, 60);
+        
+        long int senderRow = [_subtitlesTable rowForView:[sender superview]];
+        Subtitle *sub = [[_subtitlesController arrangedObjects] objectAtIndex:senderRow];
+        sub.start = startTime;
+    }
+}
+
+-(IBAction)setEndToVideoPosition:(id)sender
+{
+    if (_playerView.player.status == AVPlayerStatusReadyToPlay) {
+        CMTime currentTime = _playerView.player.currentTime;
+        Float64 currentSeconds = CMTimeGetSeconds(currentTime);
+        Time *endTime = [Time new];
+        
+        endTime.hour = floor(currentSeconds / 3600);
+        endTime.minute = floor(fmod((currentSeconds / 60), 60));
+        endTime.second = fmod(currentSeconds, 60);
+        
+        long int senderRow = [_subtitlesTable rowForView:[sender superview]];
+        Subtitle *sub = [[_subtitlesController arrangedObjects] objectAtIndex:senderRow];
+        sub.end = endTime;
+    }
+
 }
 
 - (IBAction)addSubtitle:(id)sender {
@@ -194,19 +222,35 @@
     }
 }
 
--(void)updateWithUserDefaults
+-(IBAction)openVideo:(id)sender
 {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"] ) {
-        //NSLog(@"deal with %li lines per subtitle", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"]);
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    openPanel.allowedFileTypes = @[AVMediaTypeVideo, (__bridge NSString*)kUTTypeVideo, @"public.movie"];
+    
+    long response = [openPanel runModal];
+    
+    if(response == NSModalResponseOK){
         
-    }
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"] ) {
-        //NSLog(@"deal with %li characters per line", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"]);
-    }
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"] ) {
-        //NSLog(@"deal with %li characters per second", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"]);
+        _playerView.player = [AVPlayer playerWithURL:openPanel.URL];
     }
 }
 
+-(void)updateWithUserDefaults
+{
+    for (Subtitle *sub in [_subtitlesController arrangedObjects])
+    {
+        [sub updateInfo];
+    }
+//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"] ) {
+//        //NSLog(@"deal with %li lines per subtitle", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxLines"]);
+//        
+//    }
+//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"] ) {
+//        //NSLog(@"deal with %li characters per line", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerLine"]);
+//    }
+//    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"] ) {
+//        //NSLog(@"deal with %li characters per second", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxCharactersPerSecond"]);
+//    }
+}
 
 @end

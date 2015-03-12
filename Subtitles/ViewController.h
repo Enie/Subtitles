@@ -7,12 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <NSTableViewDelegate>
 
 @property IBOutlet NSArrayController *subtitlesController;
 
 @property (weak) IBOutlet NSTableView *subtitlesTable;
+@property (weak) IBOutlet AVPlayerView *playerView;
 
 @property NSString *newlineCharacter;
 @property NSString *filePath;
@@ -23,6 +26,11 @@
 - (IBAction)openDocument:(id)sender;
 - (IBAction)saveDocument:(id)sender;
 - (IBAction)saveDocumentAs:(id)sender;
+
+- (IBAction)openVideo:(id)sender;
+
+- (IBAction)setStartToVideoPosition:(id)sender;
+- (IBAction)setEndToVideoPosition:(id)sender;
 
 - (NSString*)stringFromTableContent;
 

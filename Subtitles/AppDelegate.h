@@ -13,7 +13,6 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-
 @property (strong) PreferencesWindowController *prefWindowController;
 @property (strong) NSMutableArray *windowControllers;
 
@@ -22,6 +21,8 @@
 - (IBAction)saveDocument:(id)sender;
 - (IBAction)saveDocumentAs:(id)sender;
 - (IBAction)performClose:(id)sender;
+
+-(IBAction)openVideo:(id)sender;
 
 - (IBAction)showPreferencesWindow:(id)sender;
 

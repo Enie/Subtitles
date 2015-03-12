@@ -32,9 +32,9 @@ NSString* newlineCharacter;
         NSString *pureString = [regex stringByReplacingMatchesInString:_text options:0 range:NSMakeRange(0, [_text length]) withTemplate:@""];
         //NSLog(@"%@", pureString);
         
-        int durationInSeconds = (_duration.hour*3600 + _duration.minute*60 + (int)_duration.second);
+        double durationInSeconds = (_duration.hour*3600 + _duration.minute*60 + _duration.second);
         if (durationInSeconds!=0)
-            self.charactersPerSecond = (double)[pureString length] / (double)durationInSeconds;
+            self.charactersPerSecond = (double)[pureString length] / durationInSeconds;
         else
             self.charactersPerSecond = INFINITY;
         
