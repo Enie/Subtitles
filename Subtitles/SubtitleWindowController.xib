@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="6254"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SubtitleWindowController">
@@ -89,7 +89,7 @@ CA
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="55" viewBased="YES" id="uOb-m8-MS8">
+                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="55" viewBased="YES" id="uOb-m8-MS8">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -124,7 +124,7 @@ CA
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.text" id="OvM-FS-Gyo"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99R-yL-yWq">
+                                                                <textField toolTip="Fade In Time" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99R-yL-yWq">
                                                                     <rect key="frame" x="299" y="27" width="96" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="96" id="cdq-mT-BYt"/>
@@ -139,7 +139,7 @@ CA
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.start" id="b9q-vE-fG5"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vag-Yo-CZA">
+                                                                <textField toolTip="Fade Out Time" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vag-Yo-CZA">
                                                                     <rect key="frame" x="414" y="27" width="96" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="96" id="q7F-SB-gPS"/>
@@ -154,7 +154,7 @@ CA
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.end" id="Ycp-iR-qpT"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBf-zN-tc8">
+                                                                <textField toolTip="Display Duration" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBf-zN-tc8">
                                                                     <rect key="frame" x="529" y="27" width="96" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="96" id="vhT-mB-Vom"/>
@@ -166,8 +166,8 @@ CA
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.durationErrorColor" id="hMM-8t-huR"/>
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.duration" id="bw2-nN-cvs"/>
+                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.durationErrorColor" id="hMM-8t-huR"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField toolTip="maximum characters per line" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y3V-8e-wzN">
@@ -229,8 +229,8 @@ CA
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.charactersPerLineErrorColor" id="Uat-Rl-JXZ"/>
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.charactersPerLine" id="Kl6-n3-0b6"/>
+                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.charactersPerLineErrorColor" id="Uat-Rl-JXZ"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tzP-dJ-Uku">
@@ -246,8 +246,8 @@ CA
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.charactersPerSecondErrorColor" id="lKq-ZF-ROF"/>
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.charactersPerSecond" id="r0D-iY-whD"/>
+                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.charactersPerSecondErrorColor" id="lKq-ZF-ROF"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-Ee-697">
@@ -262,8 +262,8 @@ CA
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.linesErrorColor" id="99q-dd-BFc"/>
                                                                         <binding destination="oSd-Mk-EaU" name="value" keyPath="objectValue.lines" id="xBk-iL-YaB"/>
+                                                                        <binding destination="oSd-Mk-EaU" name="textColor" keyPath="objectValue.linesErrorColor" id="99q-dd-BFc"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="420-1B-6Wj">
@@ -338,20 +338,24 @@ CA
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="o1F-lg-NPy" name="content" keyPath="arrangedObjects" id="fhZ-w3-gBf"/>
+                                                <binding destination="4Zf-VW-hpk" name="sortDescriptors" keyPath="self.indexSortDescriptor" previousBinding="fhZ-w3-gBf" id="euw-la-FJ5"/>
                                                 <outlet property="delegate" destination="4Zf-VW-hpk" id="JL1-LY-SQd"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
                                     <nil key="backgroundColor"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="YES" id="xTx-AQ-SuY">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="xTx-AQ-SuY">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="NO" id="kW2-T2-xAm">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="kW2-T2-xAm">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <connections>
+                                    <outlet property="menu" destination="ihI-va-Dhn" id="Wjg-nj-A3o"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <holdingPriorities>
@@ -389,7 +393,7 @@ CA
             </view>
             <point key="canvasLocation" x="308" y="319"/>
         </window>
-        <arrayController objectClassName="NSMutableArray" id="o1F-lg-NPy" userLabel="Subtitles Array Controller">
+        <arrayController id="o1F-lg-NPy" userLabel="Subtitles Array Controller">
             <declaredKeys>
                 <string>start</string>
                 <string>end</string>
@@ -397,7 +401,36 @@ CA
                 <string>text</string>
                 <string>index</string>
             </declaredKeys>
+            <connections>
+                <binding destination="4Zf-VW-hpk" name="contentArray" keyPath="self.subtitles" id="zlP-Or-F6i"/>
+            </connections>
         </arrayController>
+        <menu id="ihI-va-Dhn">
+            <items>
+                <menuItem title="Insert Subtitle Above" keyEquivalent="" id="O9m-lE-cge">
+                    <connections>
+                        <action selector="insertSubtitleAbove:" target="4Zf-VW-hpk" id="qmM-A7-Prm"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Insert Subtitle Below" keyEquivalent="" id="TM5-Jv-ZYW">
+                    <connections>
+                        <action selector="InsertSubtitleBelow:" target="4Zf-VW-hpk" id="YcG-OZ-yId"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="36q-8k-IFv"/>
+                <menuItem title="Set Fade In" keyEquivalent="+" toolTip="Set the Fade In time to the current video time." id="opJ-a7-XWM">
+                    <connections>
+                        <action selector="setStartToVideoPosition:" target="4Zf-VW-hpk" id="7v8-PT-7XM"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Set Fade Out" keyEquivalent="-" toolTip="Set the Fade Out time to the current video time." id="zPs-3O-1Nj">
+                    <connections>
+                        <action selector="setEndToVideoPosition:" target="4Zf-VW-hpk" id="RpW-zm-cFo"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="801" y="334.5"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

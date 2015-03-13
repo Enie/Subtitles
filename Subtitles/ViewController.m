@@ -17,8 +17,12 @@
     self = [super init];
     if (self) {
         _newlineCharacter = @"\n";
-        [self addSubtitle:nil];
         
+        _subtitles = [NSMutableArray array];
+        [self addSubtitle:nil];
+        _indexSortDescriptor = [NSArray arrayWithObject:
+                                [NSSortDescriptor sortDescriptorWithKey:@"index"
+                                                              ascending:YES]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWithUserDefaults) name:NSUserDefaultsDidChangeNotification object:nil];
     }
@@ -46,7 +50,11 @@
         Float64 currentSeconds = CMTimeGetSeconds(currentTime);
         Time *startTime = [Time timeWithSeconds:currentSeconds];
         
-        long int senderRow = [_subtitlesTable rowForView:[sender superview]];
+        long int senderRow;
+        if ([[sender class] isEqual: [NSMenuItem class]])
+            senderRow = [_subtitlesTable selectedRow];
+        else
+            senderRow = [_subtitlesTable rowForView:[sender superview]];
         Subtitle *sub = [[_subtitlesController arrangedObjects] objectAtIndex:senderRow];
         sub.start = startTime;
     }
@@ -63,7 +71,11 @@
         endTime.minute = floor(fmod((currentSeconds / 60), 60));
         endTime.second = fmod(currentSeconds, 60);
         
-        long int senderRow = [_subtitlesTable rowForView:[sender superview]];
+        long int senderRow;
+        if ([[sender class] isEqual: [NSMenuItem class]])
+            senderRow = [_subtitlesTable selectedRow];
+        else
+            senderRow = [_subtitlesTable rowForView:[sender superview]];
         Subtitle *sub = [[_subtitlesController arrangedObjects] objectAtIndex:senderRow];
         sub.end = endTime;
     }
@@ -72,22 +84,60 @@
 
 - (IBAction)addSubtitle:(id)sender {
     Subtitle *subtitle = [Subtitle new];
-    [_subtitlesController addObject:subtitle];
+    [_subtitles addObject:subtitle];
+    [_subtitlesController rearrangeObjects];
     
-    [subtitle setIndex:[_subtitlesController.arrangedObjects count]];
-    
+    [subtitle setIndex:[_subtitles count]];
     if(subtitle.index>1)
     {
-        Subtitle *previoustSubtitle = _subtitlesController.arrangedObjects[subtitle.index-2];
-        [subtitle setStart: previoustSubtitle.end];
+        Subtitle *previoustSubtitle = _subtitles[subtitle.index-2];
+        Time *startTime =  [previoustSubtitle.end copy];
+        startTime.second = startTime.second + 0.001;
+        [subtitle setStart: startTime];
     }
     
+    [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:subtitle.index] byExtendingSelection:NO ];
+    
+    [_subtitlesTable reloadData];
+}
+
+- (IBAction)addSubtitleInPlace:(id)sender {
+    [self addSubtitle:sender];
+    [self setStartToVideoPosition:sender];
+}
+
+- (IBAction)insertSubtitleAbove:(id)sender {
+    long int selectedRow = [_subtitlesTable selectedRow];
+    [_subtitles insertObject:[Subtitle new] atIndex:selectedRow];
+    [_subtitlesController rearrangeObjects];
+    for (long int i = selectedRow; i < [_subtitlesController.arrangedObjects count]; i++) {
+        ((Subtitle*)[_subtitles objectAtIndex:i]).index = i+1;
+    }
+    [_subtitlesTable reloadData];
+    [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+}
+
+- (IBAction)InsertSubtitleBelow:(id)sender {
+    long int selectedRow = [_subtitlesTable selectedRow];
+    [_subtitles insertObject:[Subtitle new] atIndex:selectedRow+1];
+    [_subtitlesController rearrangeObjects];
+    for (long int i = selectedRow; i < [_subtitlesController.arrangedObjects count]; i++) {
+        ((Subtitle*)[_subtitles objectAtIndex:i]).index = i+1;
+    }
+    [_subtitlesTable reloadData];
+    [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow+1] byExtendingSelection:NO];
 }
 
 - (IBAction)removeSubtitle:(id)sender {
-    if ([_subtitlesTable selectedRow] >= 0) {
-        NSRange range = NSMakeRange([_subtitlesTable selectedRow], 1);
-        [_subtitlesController removeObjectsAtArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
+    long int selectedRow = [_subtitlesTable selectedRow];
+    if (selectedRow >= 0) {
+        NSRange range = NSMakeRange(selectedRow, 1);
+        [_subtitles removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
+        [_subtitlesController rearrangeObjects];
+        for (long int i = selectedRow; i < [_subtitlesController.arrangedObjects count]; i++) {
+            ((Subtitle*)[_subtitles objectAtIndex:i]).index = i+1;
+        }
+        [_subtitlesTable reloadData];
     }
 }
 
@@ -266,6 +316,27 @@ id timeObserver;
     else if(timeObserver){
         [_playerView.player removeTimeObserver:timeObserver];
     }
+}
+
+
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return _subtitles.count;
+}
+
+-(void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+ 
+    if ( !(_playerView.player.rate > 0 && !_playerView.player.error) && _videoLock) {
+        Subtitle *sub = [_subtitlesController.arrangedObjects objectAtIndex:_subtitlesTable.selectedRow];
+        [_playerView.player seekToTime:CMTimeMakeWithSeconds([sub.start toSeconds], 100)];
+    }
+
+}
+
+-(IBAction)centerSelectionInVisibleArea:(id)sender
+{
+    [_subtitlesTable scrollRowToVisible:(Subtitle*)[_subtitles objectAtIndex:[_subtitlesTable selectedRow]]];
 }
 
 @end

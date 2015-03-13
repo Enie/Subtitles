@@ -23,8 +23,10 @@
 -(void)awakeFromNib
 {
     _windowControllers = [NSMutableArray array];
-    [self newDocument:nil];
     
+    
+    [self newDocument:nil];
+    self.appHasKeyWindow = YES;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -34,12 +36,9 @@
 - (IBAction)newDocument:(id)sender
 {
     SubtitleWindowController *controllerWindow = [[SubtitleWindowController alloc] initWithWindowNibName:@"SubtitleWindowController"];
-    //[controllerWindow showWindow:self];
     
-    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
-    if(keyWindow){
-        [keyWindow resignKeyWindow];
-    }
+    if(self.keyWindow)
+        [_keyWindow resignKeyWindow];
     
     [controllerWindow.window orderFront:nil];
     [controllerWindow.window makeKeyWindow];
@@ -48,45 +47,39 @@
 
 -(IBAction)openDocument:(id)sender
 {
-    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
-    if(!keyWindow)
-    {
+    if(!self.keyWindow)
         [self newDocument:nil];
-        keyWindow = [[NSApplication sharedApplication] keyWindow];
-    }
-    [((SubtitleWindowController*)keyWindow.windowController).viewController openDocument:sender];
+    [((SubtitleWindowController*)_keyWindow.windowController).viewController openDocument:sender];
 }
 
 -(IBAction)openVideo:(id)sender
 {
-    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
-    if(!keyWindow)
-    {
+    if(!self.keyWindow)
         [self newDocument:nil];
-        keyWindow = [[NSApplication sharedApplication] keyWindow];
-    }
-    [((SubtitleWindowController*)keyWindow.windowController).viewController openVideo:sender];
+    [((SubtitleWindowController*)_keyWindow.windowController).viewController openVideo:sender];
 }
 
 -(IBAction)saveDocument:(id)sender
 {
-    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
-    if(keyWindow)
-        [((SubtitleWindowController*)keyWindow.windowController).viewController saveDocument:sender];
+    if(self.keyWindow)
+        [((SubtitleWindowController*)_keyWindow.windowController).viewController saveDocument:sender];
 
 }
 
 -(IBAction)saveDocumentAs:(id)sender
 {
-    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
-    if(keyWindow)
-        [((SubtitleWindowController*)keyWindow.windowController).viewController saveDocumentAs:sender];
+    if(self.keyWindow)
+        [((SubtitleWindowController*)_keyWindow.windowController).viewController saveDocumentAs:sender];
 }
 
 - (IBAction)performClose:(id)sender
 {
     NSWindow *closingWindow = [[NSApplication sharedApplication] keyWindow];
     [_windowControllers removeObject:closingWindow.windowController];
+    
+    if (!_windowControllers.count) {
+        self.appHasKeyWindow = NO;
+    }
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
@@ -96,5 +89,10 @@
 }
 
 
+-(NSWindow *)keyWindow
+{
+    _keyWindow = [[NSApplication sharedApplication] keyWindow];
+    return [[NSApplication sharedApplication] keyWindow];
+}
 
 @end

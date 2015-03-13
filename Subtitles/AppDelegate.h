@@ -13,6 +13,9 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (nonatomic) NSWindow *keyWindow;
+@property BOOL appHasKeyWindow;
+
 @property (strong) PreferencesWindowController *prefWindowController;
 @property (strong) NSMutableArray *windowControllers;
 
@@ -22,9 +25,16 @@
 - (IBAction)saveDocumentAs:(id)sender;
 - (IBAction)performClose:(id)sender;
 
--(IBAction)openVideo:(id)sender;
-
+- (IBAction)openVideo:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
+
+- (IBAction)addSubtitle:(id)sender;
+- (IBAction)removeSubtitle:(id)sender;
+- (IBAction)setStartToVideoPosition:(id)sender;
+- (IBAction)setEndToVideoPosition:(id)sender;
+- (IBAction)addSubtitleInPlace:(id)sender;
+- (IBAction)insertSubtitleAbove:(id)sender;
+- (IBAction)InsertSubtitleBelow:(id)sender;
 
 @end
 

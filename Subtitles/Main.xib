@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -10,11 +10,6 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="7YP-tV-aYp" userLabel="App Delegate" customClass="AppDelegate"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <customObject id="ELL-5X-7Wa" customClass="ViewController">
-            <connections>
-                <outlet property="subtitlesController" destination="fDn-BI-IzX" id="6LT-gI-QsQ"/>
-            </connections>
-        </customObject>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="Subtitles" id="1Xt-HY-uBw">
@@ -349,6 +344,62 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Subtitle" id="gC0-0w-3lo">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Subtitle" id="lRd-df-78Y">
+                        <items>
+                            <menuItem title="New Subtitle" keyEquivalent="n" toolTip="Set the Fade In time to the current video time." id="KQV-9g-k7b">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="addSubtitle:" target="-1" id="Eby-NG-r69"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="YKy-cu-mGO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Subtitle in Time" keyEquivalent="N" toolTip="Set the Fade In time to the current video time." id="q93-Ch-3Uq">
+                                <connections>
+                                    <action selector="addSubtitleInPlace:" target="-1" id="h6l-gb-Lec"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="Bm1-aM-kzf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Selected Subtitle" toolTip="Set the Fade In time to the current video time." id="ZMn-ad-1UI">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="removeSubtitle:" target="-1" id="lfS-YO-OeS"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="m6R-M0-n2r"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="waw-Lo-UTl"/>
+                            <menuItem title="Insert Above Selection" keyEquivalent="" toolTip="Set the Fade In time to the current video time." id="Aqw-Td-1w4">
+                                <connections>
+                                    <action selector="insertSubtitleAbove:" target="-1" id="hvE-uc-csZ"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="w2o-EP-6cU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Insert Below Selection" keyEquivalent="" toolTip="Set the Fade In time to the current video time." id="c1V-ez-Ocb">
+                                <connections>
+                                    <action selector="InsertSubtitleBelow:" target="-1" id="kN2-dA-gZs"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="W2h-MT-Aw7"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ONV-U7-a0I"/>
+                            <menuItem title="Set Fade In" keyEquivalent="+" toolTip="Set the Fade In time to the current video time." id="QGv-WW-SdU">
+                                <connections>
+                                    <action selector="setStartToVideoPosition:" target="-1" id="P20-Sj-YFH"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="GrB-KA-EeF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Set Fade Out" keyEquivalent="-" toolTip="Set the Fade Out time to the current video time." id="eko-8j-uRg">
+                                <connections>
+                                    <action selector="setEndToVideoPosition:" target="-1" id="J2h-6N-H5b"/>
+                                    <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="U76-3s-BlB"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
