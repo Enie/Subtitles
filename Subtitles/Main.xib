@@ -378,13 +378,13 @@ CA
                             <menuItem isSeparatorItem="YES" id="waw-Lo-UTl"/>
                             <menuItem title="Insert Above Selection" keyEquivalent="" toolTip="Set the Fade In time to the current video time." id="Aqw-Td-1w4">
                                 <connections>
-                                    <action selector="insertSubtitleAbove:" target="-1" id="hvE-uc-csZ"/>
+                                    <action selector="insertSubtitleAbove:" target="-1" id="QJJ-HE-SY8"/>
                                     <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="w2o-EP-6cU"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Insert Below Selection" keyEquivalent="" toolTip="Set the Fade In time to the current video time." id="c1V-ez-Ocb">
                                 <connections>
-                                    <action selector="InsertSubtitleBelow:" target="-1" id="kN2-dA-gZs"/>
+                                    <action selector="InsertSubtitleBelow:" target="-1" id="Hgv-Ec-FBi"/>
                                     <binding destination="7YP-tV-aYp" name="enabled" keyPath="self.appHasKeyWindow" id="W2h-MT-Aw7"/>
                                 </connections>
                             </menuItem>

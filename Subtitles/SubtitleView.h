@@ -7,13 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AVKit/AVKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface SubtitleView : NSView <NSDraggingDestination, NSPasteboardItemDataProvider>
+@interface SubtitleView : NSView
 
-@property IBOutlet AVPlayerView *playerView;
-@property (strong) AVPlayer *player;
-@property (strong) AVPlayerLayer *playerLayer;
+@property (nonatomic) NSString *text;
 
 @end

@@ -17,6 +17,7 @@
         <customObject id="4Zf-VW-hpk" customClass="ViewController">
             <connections>
                 <outlet property="playerView" destination="2kQ-h0-MHa" id="wga-yc-ioK"/>
+                <outlet property="subtitleView" destination="Fh1-ZO-05g" id="yBL-Ld-sFa"/>
                 <outlet property="subtitlesController" destination="o1F-lg-NPy" id="C1t-AZ-N4n"/>
                 <outlet property="subtitlesTable" destination="uOb-m8-MS8" id="V5k-cc-hUX"/>
                 <outlet property="view" destination="GAa-aU-LfB" id="dLZ-Nk-o0j"/>
@@ -74,12 +75,19 @@ CA
                                     <avPlayerView translatesAutoresizingMaskIntoConstraints="NO" id="2kQ-h0-MHa">
                                         <rect key="frame" x="0.0" y="0.0" width="640" height="159"/>
                                     </avPlayerView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fh1-ZO-05g" customClass="SubtitleView">
+                                        <rect key="frame" x="0.0" y="0.0" width="640" height="159"/>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2kQ-h0-MHa" firstAttribute="top" secondItem="9fC-sw-MMo" secondAttribute="top" id="0rZ-Nx-9Pu"/>
                                     <constraint firstAttribute="trailing" secondItem="2kQ-h0-MHa" secondAttribute="trailing" id="InH-Aj-UMI"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fh1-ZO-05g" secondAttribute="trailing" id="Nd1-UV-V2C"/>
+                                    <constraint firstItem="Fh1-ZO-05g" firstAttribute="leading" secondItem="9fC-sw-MMo" secondAttribute="leading" id="QpS-IQ-bdW"/>
                                     <constraint firstAttribute="bottom" secondItem="2kQ-h0-MHa" secondAttribute="bottom" id="azD-Ra-blH"/>
+                                    <constraint firstItem="Fh1-ZO-05g" firstAttribute="top" secondItem="9fC-sw-MMo" secondAttribute="top" id="bTq-DH-vMb"/>
                                     <constraint firstItem="2kQ-h0-MHa" firstAttribute="leading" secondItem="9fC-sw-MMo" secondAttribute="leading" id="brx-5D-Q5w"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fh1-ZO-05g" secondAttribute="bottom" id="gAr-pW-hHS"/>
                                 </constraints>
                             </customView>
                             <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="NTd-eY-o6P">
@@ -89,7 +97,7 @@ CA
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="55" viewBased="YES" id="uOb-m8-MS8">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="55" viewBased="YES" id="uOb-m8-MS8">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -268,7 +276,7 @@ CA
                                                                 </textField>
                                                                 <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="420-1B-6Wj">
                                                                     <rect key="frame" x="279" y="29" width="20" height="20"/>
-                                                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="RecordButton" imagePosition="overlaps" alignment="center" alternateImage="RecordButtonAlt" continuous="YES" state="on" imageScaling="proportionallyDown" inset="2" id="Jgc-la-bdh">
+                                                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="RecordButton" imagePosition="overlaps" alignment="center" alternateImage="RecordButtonAlt" refusesFirstResponder="YES" state="on" imageScaling="proportionallyDown" inset="2" id="Jgc-la-bdh">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -278,7 +286,7 @@ CA
                                                                 </button>
                                                                 <button tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="uy8-kT-uDf">
                                                                     <rect key="frame" x="395" y="29" width="20" height="20"/>
-                                                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="RecordButton" imagePosition="overlaps" alignment="center" alternateImage="RecordButtonAlt" state="on" imageScaling="proportionallyDown" inset="2" id="ifB-oP-sbZ">
+                                                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="RecordButton" imagePosition="overlaps" alignment="center" alternateImage="RecordButtonAlt" refusesFirstResponder="YES" state="on" imageScaling="proportionallyDown" inset="2" id="ifB-oP-sbZ">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>

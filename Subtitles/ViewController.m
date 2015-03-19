@@ -29,13 +29,31 @@
     return self;
 }
 
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-//    
-//    _newlineCharacter = @"\n";
-//    
-//    [self addSubtitle:nil];
-//}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    
+    NSLog(@"Changed: %@", keyPath);
+    
+    if ([keyPath isEqual:@"rate"])
+    {
+        if(_playerView.player.rate != 0)
+            [self startSubtitleAutoplay];
+        else
+            [self stopSubtitleAutoplay];
+
+    }
+    /*
+     Be sure to call the superclass's implementation *if it implements it*.
+     NSObject does not implement the method.
+     */
+    /*[super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
+     */
+}
+
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
@@ -95,10 +113,8 @@
         startTime.second = startTime.second + 0.001;
         [subtitle setStart: startTime];
     }
-    
-    [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:subtitle.index] byExtendingSelection:NO ];
-    
     [_subtitlesTable reloadData];
+    [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:subtitle.index-1] byExtendingSelection:NO ];
 }
 
 - (IBAction)addSubtitleInPlace:(id)sender {
@@ -138,6 +154,7 @@
             ((Subtitle*)[_subtitles objectAtIndex:i]).index = i+1;
         }
         [_subtitlesTable reloadData];
+        [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
     }
 }
 
@@ -278,6 +295,10 @@
     if(response == NSModalResponseOK){
         
         _playerView.player = [AVPlayer playerWithURL:openPanel.URL];
+        
+        _player = _playerView.player;
+        
+        [_player addObserver:self forKeyPath:@"rate" options:0 context:nil];
     }
 }
 
@@ -291,29 +312,35 @@
 
 
 id timeObserver;
--(void)setVideoLock:(BOOL)videoLock
+-(void)startSubtitleAutoplay
 {
-    _videoLock = videoLock;
-    if(_videoLock)
-    {
-        CMTime tm = CMTimeMakeWithSeconds(1, 10);
+    CMTime tm = CMTimeMakeWithSeconds(1, 10);
         
-        timeObserver = [_playerView.player addPeriodicTimeObserverForInterval:tm
-             queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+    timeObserver = [_playerView.player addPeriodicTimeObserverForInterval:tm
+         queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) usingBlock:^(CMTime time) {
 
-                 Time *currentTime = [Time timeWithSeconds:CMTimeGetSeconds(time)];
-                 for(Subtitle *sub in [_subtitlesController arrangedObjects])
+             Time *currentTime = [Time timeWithSeconds:CMTimeGetSeconds(time)];
+             for(Subtitle *sub in [_subtitlesController arrangedObjects])
+             {
+                 if([sub.end isGreaterThan:currentTime] && [sub.start isLessThan:currentTime])
                  {
-                     if([sub.end isGreaterThan:currentTime] && [sub.start isLessThan:currentTime])
-                     {
-                         [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:sub.index-1] byExtendingSelection:NO];
-                         [_subtitlesTable scrollRowToVisible:sub.index-1];
-                         return;
-                     }
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         //if(_videoLock)
+                         {
+                             [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:sub.index-1] byExtendingSelection:NO];
+                             [_subtitlesTable scrollRowToVisible:sub.index-1];
+                         }
+                         _subtitleView.text = sub.text;
+                     });
+                     return;
                  }
-             }];
-    }
-    else if(timeObserver){
+             }
+         }];
+}
+
+-(void)stopSubtitleAutoplay
+{
+    if(timeObserver){
         [_playerView.player removeTimeObserver:timeObserver];
     }
 }
@@ -326,12 +353,12 @@ id timeObserver;
 
 -(void)tableViewSelectionDidChange:(NSNotification *)notification
 {
- 
+    Subtitle *sub = [_subtitlesController.arrangedObjects objectAtIndex:_subtitlesTable.selectedRow];
+    _subtitleView.text = sub.text;
     if ( !(_playerView.player.rate > 0 && !_playerView.player.error) && _videoLock) {
-        Subtitle *sub = [_subtitlesController.arrangedObjects objectAtIndex:_subtitlesTable.selectedRow];
+        
         [_playerView.player seekToTime:CMTimeMakeWithSeconds([sub.start toSeconds], 100)];
     }
-
 }
 
 -(IBAction)centerSelectionInVisibleArea:(id)sender

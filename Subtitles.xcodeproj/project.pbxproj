@@ -21,6 +21,7 @@
 		87A08C871AAF069B006CEC25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A08C861AAF069B006CEC25 /* Images.xcassets */; };
 		87A08C961AAF069B006CEC25 /* SubtitlesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C951AAF069B006CEC25 /* SubtitlesTests.m */; };
 		87A08CA11AAF100A006CEC25 /* Subtitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08CA01AAF100A006CEC25 /* Subtitle.m */; };
+		87D227F71ABACBCD00F326FA /* SubtitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B481AB0F83E007F915C /* SubtitleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +267,7 @@
 				87A08C821AAF069B006CEC25 /* main.m in Sources */,
 				87A08C801AAF069B006CEC25 /* AppDelegate.m in Sources */,
 				87163B381AAF7C79007F915C /* TimeFormatter.m in Sources */,
+				87D227F71ABACBCD00F326FA /* SubtitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

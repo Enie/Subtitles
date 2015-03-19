@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "SubtitleView.h"
 
 @interface ViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
 
@@ -18,11 +19,13 @@
 @property (weak) IBOutlet NSTableView *subtitlesTable;
 @property (weak) IBOutlet NSArray *indexSortDescriptor;
 @property (weak) IBOutlet AVPlayerView *playerView;
+@property (weak) IBOutlet AVPlayer *player;
+@property (weak) IBOutlet SubtitleView *subtitleView;
 
 @property NSString *newlineCharacter;
 @property NSString *filePath;
 
-@property (nonatomic) BOOL videoLock;
+@property BOOL videoLock;
 
 - (IBAction)addSubtitle:(id)sender;
 - (IBAction)addSubtitleInPlace:(id)sender;
@@ -37,6 +40,9 @@
 
 - (IBAction)setStartToVideoPosition:(id)sender;
 - (IBAction)setEndToVideoPosition:(id)sender;
+
+-(void)startSubtitleAutoplay;
+-(void)stopSubtitleAutoplay;
 
 - (NSString*)stringFromTableContent;
 
