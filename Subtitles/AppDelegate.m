@@ -57,6 +57,7 @@
     if(!self.keyWindow)
         [self newDocument:nil];
     [((SubtitleWindowController*)_keyWindow.windowController).viewController openVideo:sender];
+    _appHasVideo = YES;
 }
 
 -(IBAction)saveDocument:(id)sender
@@ -75,6 +76,7 @@
 - (IBAction)performClose:(id)sender
 {
     NSWindow *closingWindow = [[NSApplication sharedApplication] keyWindow];
+    [closingWindow close];
     [_windowControllers removeObject:closingWindow.windowController];
     
     if (!_windowControllers.count) {

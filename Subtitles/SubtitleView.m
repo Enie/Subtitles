@@ -11,6 +11,7 @@
 @implementation SubtitleView
 
 CATextLayer *textLayer;
+CALayer *backgroundLayer;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -23,7 +24,12 @@ CATextLayer *textLayer;
         textLayer.fontSize = 16;
         textLayer.alignmentMode = kCAAlignmentCenter;
 
+        backgroundLayer = [CALayer layer];
+        backgroundLayer.backgroundColor = [NSColor.blackColor colorWithAlphaComponent:0.8].CGColor;
+        backgroundLayer.cornerRadius = 8;
+        
         self.text = @"";
+        [self.layer addSublayer:backgroundLayer];
         [self.layer addSublayer:textLayer];
     }
     return self;
@@ -35,7 +41,14 @@ CATextLayer *textLayer;
     textLayer.string = _text;
     CGRect labelRect = [_text boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:17.0] }];
     textLayer.frame = labelRect;
-    textLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds)  + CGRectGetHeight(labelRect)/2);
+    textLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds)  + CGRectGetHeight(labelRect));
+    
+    labelRect.origin.x -= 8;
+    labelRect.origin.y -= 4;
+    labelRect.size.width += 16;
+    labelRect.size.height += 16;
+    backgroundLayer.frame = labelRect;
+    backgroundLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds)  + CGRectGetHeight(labelRect) - 12);
 }
 
 -(void)layout
@@ -43,7 +56,14 @@ CATextLayer *textLayer;
     [super layout];
     CGRect labelRect = [_text boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:17.0] }];
     textLayer.frame = labelRect;
-    textLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds) + CGRectGetHeight(labelRect)/2);
+    textLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds) + CGRectGetHeight(labelRect));
+    
+    labelRect.origin.x -= 8;
+    labelRect.origin.y -= 4;
+    labelRect.size.width += 16;
+    labelRect.size.height += 16;
+    backgroundLayer.frame = labelRect;
+    backgroundLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds)  + CGRectGetHeight(labelRect) - 12);
 }
 
 @end

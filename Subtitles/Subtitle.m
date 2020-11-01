@@ -30,7 +30,6 @@ NSString* newlineCharacter;
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>" options:NSRegularExpressionCaseInsensitive error:&error];
         NSString *pureString = [regex stringByReplacingMatchesInString:_text options:0 range:NSMakeRange(0, [_text length]) withTemplate:@""];
-        //NSLog(@"%@", pureString);
         
         double durationInSeconds = [_duration toSeconds];
         if (durationInSeconds!=0)

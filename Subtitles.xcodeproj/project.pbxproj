@@ -14,7 +14,6 @@
 		87163B3F1AB05C71007F915C /* SubtitleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B3E1AB05C71007F915C /* SubtitleWindowController.m */; };
 		87163B431AB06E81007F915C /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87163B411AB06E81007F915C /* PreferencesWindowController.m */; };
 		87163B441AB06E81007F915C /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87163B421AB06E81007F915C /* PreferencesWindowController.xib */; };
-		87163B461AB0E8CF007F915C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87163B451AB0E8CF007F915C /* AVKit.framework */; };
 		87A08C801AAF069B006CEC25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C7F1AAF069B006CEC25 /* AppDelegate.m */; };
 		87A08C821AAF069B006CEC25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C811AAF069B006CEC25 /* main.m */; };
 		87A08C851AAF069B006CEC25 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A08C841AAF069B006CEC25 /* ViewController.m */; };
@@ -46,7 +45,6 @@
 		87163B401AB06E81007F915C /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
 		87163B411AB06E81007F915C /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
 		87163B421AB06E81007F915C /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
-		87163B451AB0E8CF007F915C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		87163B471AB0F83E007F915C /* SubtitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtitleView.h; sourceTree = "<group>"; };
 		87163B481AB0F83E007F915C /* SubtitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtitleView.m; sourceTree = "<group>"; };
 		87A08C791AAF069B006CEC25 /* Subtitles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subtitles.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87163B461AB0E8CF007F915C /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +84,6 @@
 		87A08C701AAF069B006CEC25 = {
 			isa = PBXGroup;
 			children = (
-				87163B451AB0E8CF007F915C /* AVKit.framework */,
 				87A08C7B1AAF069B006CEC25 /* Subtitles */,
 				87A08C921AAF069B006CEC25 /* SubtitlesTests */,
 				87A08C7A1AAF069B006CEC25 /* Products */,
@@ -207,6 +203,8 @@
 				TargetAttributes = {
 					87A08C781AAF069B006CEC25 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = PEZAT5DWHN;
+						ProvisioningStyle = Automatic;
 					};
 					87A08C8E1AAF069B006CEC25 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -219,6 +217,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -335,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -371,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -381,12 +380,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PEZAT5DWHN;
 				INFOPLIST_FILE = Subtitles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = de.eniestudio.Subtitles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.10;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -394,12 +399,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PEZAT5DWHN;
 				INFOPLIST_FILE = Subtitles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = de.eniestudio.Subtitles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.10;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

@@ -14,15 +14,23 @@
 
 @implementation SubtitleWindowController
 
+NSTimer* timer;
+
 - (void)windowDidLoad {
     [super windowDidLoad];
+    timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [[[[self.window standardWindowButton:NSWindowCloseButton] superview] animator] setAlphaValue:0];
+    }];
+}
+
+-(void)mouseMoved:(NSEvent *)event {
+    if (timer) [timer invalidate];
+    timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [[[[self.window standardWindowButton:NSWindowCloseButton] superview] animator] setAlphaValue:0];
+    }];
+    [[[[self.window standardWindowButton:NSWindowCloseButton] superview] animator] setAlphaValue:1];
     
-//#ifdef MAC_OS_X_VERSION_10_10
-//    [self.window setTitleVisibility:NSWindowTitleHidden];
-//    [self.window setTitlebarAppearsTransparent:YES];
-//    self.window.styleMask = self.window.styleMask | NSFullSizeContentViewWindowMask;
-//    
-//#endif
+    
 }
 
 @end

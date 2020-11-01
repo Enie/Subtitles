@@ -29,19 +29,21 @@
     return self;
 }
 
+- (void)focusTextInSelection {
+    NSTableRowView* view = [_subtitlesTable rowViewAtRow:_subtitlesTable.selectedRow makeIfNecessary:NO];
+    if (view) {
+        [_subtitlesTable.window makeFirstResponder:[view viewWithTag:10]];
+    }
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    
-    NSLog(@"Changed: %@", keyPath);
-    
     if ([keyPath isEqual:@"rate"])
     {
         if(_playerView.player.rate != 0)
             [self startSubtitleAutoplay];
         else
             [self stopSubtitleAutoplay];
-
     }
     /*
      Be sure to call the superclass's implementation *if it implements it*.
@@ -115,6 +117,8 @@
     }
     [_subtitlesTable reloadData];
     [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:subtitle.index-1] byExtendingSelection:NO ];
+    
+    [self focusTextInSelection];
 }
 
 - (IBAction)addSubtitleInPlace:(id)sender {
@@ -144,6 +148,14 @@
     [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow+1] byExtendingSelection:NO];
 }
 
+- (IBAction)togglePlayback:(id)sender {
+    if (_playerView.player.rate == 0) {
+        _playerView.player.rate = 1.0;
+    } else {
+        _playerView.player.rate = 0.0;
+    }
+}
+
 - (IBAction)removeSubtitle:(id)sender {
     long int selectedRow = [_subtitlesTable selectedRow];
     if (selectedRow >= 0) {
@@ -164,7 +176,7 @@
     
     for (Subtitle* sub in _subtitlesController.arrangedObjects)
     {
-        [srt appendFormat:@"%lu\n%@ --> %@\n%@\n\n", sub.index, [sub.start toString], [sub.end toString], sub.text];
+        [srt appendFormat:@"%lu\n%@ --> %@\n%@\n\n", sub.index, [sub.start toString], [sub.end toString], sub.text ? sub.text : @""];
     }
     
     return srt;
@@ -200,7 +212,7 @@
                            error:nil];
             
             _filePath = filename;
-            [self.view.window setTitleWithRepresentedFilename:filename];
+            [self.view.window setTitleWithRepresentedFilename:savePanel.URL.path];
 
         } else if(response == NSModalResponseCancel) {
             
@@ -261,6 +273,14 @@
             NSArray *subtitles = [content componentsSeparatedByString:twoNewlines];
             for (NSString *string in subtitles) {
                 NSMutableArray *components = [[string componentsSeparatedByString:_newlineCharacter] mutableCopy];
+                if (components.count < 2) continue;
+                
+                if ([components[0] compare:@""] == NSEqualToComparison) {
+                    if ([components[1] compare:@""] == NSEqualToComparison) {
+                        continue;
+                    }
+                    [components removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,1)]];
+                }
                 
                 Subtitle *subtitle = [Subtitle new];
                 subtitle.index = [components[0] intValue];
@@ -270,14 +290,19 @@
                 
                 [components removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,2)]];
                 
-                subtitle.text = [components componentsJoinedByString:@"\n"];
+                // check if string is empty
+                if (components.count == 0) {
+                    subtitle.text = @"";
+                } else {
+                    subtitle.text = [components componentsJoinedByString:@"\n"];
+                }
                 
                 [_subtitlesController addObject:subtitle];
             }
-            
-            [self.view.window setTitleWithRepresentedFilename:openPanel.URL.path];
-            _filePath = openPanel.URL.path;
         }
+        
+        [self.view.window setTitleWithRepresentedFilename:openPanel.URL.path];
+        _filePath = openPanel.URL.path;
         
     } else if(response == NSModalResponseCancel) {
         
@@ -312,10 +337,16 @@
 
 
 id timeObserver;
+AVPlayer *observer;
+bool observerSelection = NO;
 -(void)startSubtitleAutoplay
 {
+    if (timeObserver) {
+        return;
+    }
     CMTime tm = CMTimeMakeWithSeconds(1, 10);
         
+    observer = _playerView.player;
     timeObserver = [_playerView.player addPeriodicTimeObserverForInterval:tm
          queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) usingBlock:^(CMTime time) {
 
@@ -327,7 +358,9 @@ id timeObserver;
                      dispatch_async(dispatch_get_main_queue(), ^{
                          //if(_videoLock)
                          {
+                             observerSelection = YES;
                              [_subtitlesTable selectRowIndexes:[NSIndexSet indexSetWithIndex:sub.index-1] byExtendingSelection:NO];
+                             observerSelection = NO;
                              [_subtitlesTable scrollRowToVisible:sub.index-1];
                          }
                          _subtitleView.text = sub.text;
@@ -341,7 +374,8 @@ id timeObserver;
 -(void)stopSubtitleAutoplay
 {
     if(timeObserver){
-        [_playerView.player removeTimeObserver:timeObserver];
+        [observer removeTimeObserver:timeObserver];
+        timeObserver = nil;
     }
 }
 
@@ -355,9 +389,10 @@ id timeObserver;
 {
     Subtitle *sub = [_subtitlesController.arrangedObjects objectAtIndex:_subtitlesTable.selectedRow];
     _subtitleView.text = sub.text;
-    if ( !(_playerView.player.rate > 0 && !_playerView.player.error) && _videoLock) {
-        
+    if ( !observerSelection && !_playerView.player.error && _videoLock) {
+//        _playerView.player.rate = 0;
         [_playerView.player seekToTime:CMTimeMakeWithSeconds([sub.start toSeconds], 100)];
+//        _playerView.player.rate = 1;
     }
 }
 

@@ -15,6 +15,7 @@
 
 @property (nonatomic) NSWindow *keyWindow;
 @property BOOL appHasKeyWindow;
+@property BOOL appHasVideo;
 
 @property (strong) PreferencesWindowController *prefWindowController;
 @property (strong) NSMutableArray *windowControllers;
@@ -28,6 +29,7 @@
 - (IBAction)openVideo:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
 
+- (IBAction)togglePlayback:(id)sender;
 - (IBAction)addSubtitle:(id)sender;
 - (IBAction)removeSubtitle:(id)sender;
 - (IBAction)setStartToVideoPosition:(id)sender;

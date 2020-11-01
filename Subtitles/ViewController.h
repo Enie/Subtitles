@@ -21,6 +21,7 @@
 @property (weak) IBOutlet AVPlayerView *playerView;
 @property (weak) IBOutlet AVPlayer *player;
 @property (weak) IBOutlet SubtitleView *subtitleView;
+@property (weak) IBOutlet NSButton *lockButton;
 
 @property NSString *newlineCharacter;
 @property NSString *filePath;
@@ -32,6 +33,7 @@
 - (IBAction)insertSubtitleAbove:(id)sender;
 - (IBAction)InsertSubtitleBelow:(id)sender;
 - (IBAction)removeSubtitle:(id)sender;
+- (IBAction)togglePlayback:(id)sender;
 
 - (IBAction)openVideo:(id)sender;
 - (IBAction)openDocument:(id)sender;
